@@ -23,6 +23,7 @@ export class UserService {
 
   async saveUser(user: User) {
     try {
+      ProducerService.sendMessage('User created', 'user.created');
       const savedUser = new this.userModel(user);
       return await savedUser.save();
     } catch (error) {

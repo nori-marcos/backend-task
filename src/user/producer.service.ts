@@ -4,6 +4,9 @@ import { Connection } from 'amqplib';
 
 @Injectable()
 export default class ProducerService {
+  static sendMessage(arg0: string, arg1: string) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @InjectAmqpConnection()
     private readonly amqp: Connection,

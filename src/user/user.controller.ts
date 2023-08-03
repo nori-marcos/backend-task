@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common';
 import { User } from './entities/user';
 import { UserService } from './user.service';
-import ProducerService from './producer.service';
 
 @Controller('api/user')
 export class UserController {
