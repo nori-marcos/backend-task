@@ -6,6 +6,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import axios from 'axios';
 import { Avatar } from './entities/avatar';
+import ProducerService from './producer.service';
 
 @Injectable()
 export class UserService {

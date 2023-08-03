@@ -4,10 +4,17 @@ import { UserSchema } from './schemas/user.schema';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserService } from './user.service';
 import { AvatarSchema } from './schemas/avatar.schema';
+import { AmqpModule } from 'nestjs-amqp';
+import ProducerService from './producer.service';
 
 @Module({
   controllers: [UserController],
   imports: [
+    AmqpModule.forRoot({
+      name: 'rabbitmq',
+      hostname: 'localhost',
+      port: 5672,
+    }),
     MongooseModule.forFeature([
       { name: 'User', schema: UserSchema },
       { name: 'Avatar', schema: AvatarSchema },
