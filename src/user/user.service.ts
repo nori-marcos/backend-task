@@ -11,6 +11,7 @@ import ProducerService from './producer.service';
 @Injectable()
 export class UserService {
   constructor(
+    private readonly producerService: ProducerService,
     @InjectModel('User') private readonly userModel: Model<User>,
     @InjectModel('Avatar') private readonly avatarModel: Model<Avatar>,
   ) {}
@@ -23,8 +24,9 @@ export class UserService {
 
   async saveUser(user: User) {
     try {
-      ProducerService.sendMessage('User created', 'user.created');
       const savedUser = new this.userModel(user);
+      const message = 'User created successfully!';
+      this.producerService.sendMessage(message);
       return await savedUser.save();
     } catch (error) {
       throw new HttpException(error.message, 400);

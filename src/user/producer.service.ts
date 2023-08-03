@@ -1,27 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { InjectAmqpConnection } from 'nestjs-amqp';
-import { Connection } from 'amqplib';
+import {
+  ClientProxy,
+  ClientProxyFactory,
+  Transport,
+} from '@nestjs/microservices';
 
 @Injectable()
 export default class ProducerService {
-  static sendMessage(arg0: string, arg1: string) {
-    throw new Error('Method not implemented.');
-  }
-  constructor(
-    @InjectAmqpConnection()
-    private readonly amqp: Connection,
-  ) {}
+  private readonly rabbitMQClient: ClientProxy;
 
-  async sendMessage(message: string, routingKey: string) {
-    await this.amqp.createChannel().then((channel) => {
-      const queue = 'user_queue';
-      channel.assertQueue(queue, { durable: true });
-      channel.sendToQueue(queue, Buffer.from(message), {
-        persistent: true,
-        headers: {
-          routingKey,
-        },
-      });
+  constructor() {
+    this.rabbitMQClient = ClientProxyFactory.create({
+      transport: Transport.RMQ,
+      options: {
+        urls: ['amqp://localhost:5672', 'amqp://localhost:8000'],
+        queue: 'user_queue',
+      },
     });
+  }
+
+  async sendMessage(message: string) {
+    this.rabbitMQClient.emit('message_pattern', message);
   }
 }
