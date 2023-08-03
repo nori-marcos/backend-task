@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserController } from './user.controller';
-import { UserService } from './user.service';
 import { User } from './entities/user';
+import { UserService } from './services/user.service';
 
 const savedUser = {
   id: '1',

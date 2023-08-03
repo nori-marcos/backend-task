@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { UserController } from './user.controller';
 import { UserSchema } from './schemas/user.schema';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserService } from './user.service';
 import { AvatarSchema } from './schemas/avatar.schema';
-import { AmqpModule } from 'nestjs-amqp';
-import ProducerService from './producer.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { UserService } from './services/user.service';
+import ProducerService from './services/producer.service';
+import { EmailService } from './services/email.service';
 
 @Module({
   controllers: [UserController],
@@ -21,11 +21,12 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         },
       },
     ]),
+
     MongooseModule.forFeature([
       { name: 'User', schema: UserSchema },
       { name: 'Avatar', schema: AvatarSchema },
     ]),
   ],
-  providers: [UserService, ProducerService],
+  providers: [UserService, ProducerService, EmailService],
 })
 export class UserModule {}

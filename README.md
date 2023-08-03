@@ -15,6 +15,7 @@ This project is a user management REST API developed using TypeScript, NestJS, M
 2. Start the application in development mode with: `npm run start:dev`.
 3. Make sure MongoDB and RabbitMQ are running locally on their default ports (MongoDB: 27017, RabbitMQ: 5672).
 4. Access the Swagger documentation for better understanding and API exploration: [http://localhost:3000/api](http://localhost:3000/api).
+5. After using the method **POST /api/user**, the terminal will print a link to check the email sent by using the free service https://ethereal.email/
 
 ## Note
 

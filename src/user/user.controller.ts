@@ -9,8 +9,12 @@ import {
   Post,
 } from '@nestjs/common';
 import { User } from './entities/user';
-import { UserService } from './user.service';
-import { ApiAcceptedResponse, ApiCreatedResponse, ApiParam, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiAcceptedResponse,
+  ApiCreatedResponse,
+  ApiParam,
+} from '@nestjs/swagger';
+import { UserService } from './services/user.service';
 
 @Controller('api/user')
 export class UserController {
@@ -36,7 +40,8 @@ export class UserController {
   @Get(':userId/avatar')
   @HttpCode(HttpStatus.OK)
   @ApiAcceptedResponse({
-    description: 'The user`s avatar is saved successfully. The 64base image is returned.',
+    description:
+      'The user`s avatar is saved successfully. The 64base image is returned.',
     type: String,
   })
   @ApiParam({

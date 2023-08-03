@@ -1,16 +1,18 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { User } from './entities/user';
 import { InjectModel } from '@nestjs/mongoose';
 import * as fs from 'fs';
 import * as path from 'path';
 import axios from 'axios';
-import { Avatar } from './entities/avatar';
 import ProducerService from './producer.service';
+import { User } from '../entities/user';
+import { Avatar } from '../entities/avatar';
+import { EmailService } from './email.service';
 
 @Injectable()
 export class UserService {
   constructor(
+    private readonly emailService: EmailService,
     private readonly producerService: ProducerService,
     @InjectModel('User') private readonly userModel: Model<User>,
     @InjectModel('Avatar') private readonly avatarModel: Model<Avatar>,
@@ -27,6 +29,7 @@ export class UserService {
       const savedUser = new this.userModel(user);
       const message = 'User created successfully!';
       this.producerService.sendMessage(message);
+      this.emailService.sendEmail(user.email, message, message);
       return await savedUser.save();
     } catch (error) {
       throw new HttpException(error.message, 400);
