@@ -20,7 +20,15 @@ export class User extends Document {
   last_name: string;
   @ApiProperty({
     description: 'The avatar of the user',
-    example: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
+    example: 'https://reqres.in/img/faces/1-image.jpg',
   })
   avatar: string;
+
+  constructor(partial?: Partial<User>) {
+    super();
+    this.email = partial?.email;
+    this.first_name = partial?.first_name;
+    this.last_name = partial?.last_name;
+    this.avatar = partial?.avatar;
+  }
 }
