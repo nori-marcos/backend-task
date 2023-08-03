@@ -23,12 +23,4 @@ export class User extends Document {
     example: 'https://reqres.in/img/faces/1-image.jpg',
   })
   avatar: string;
-
-  constructor(partial?: Partial<User>) {
-    super();
-    this.email = partial?.email;
-    this.first_name = partial?.first_name;
-    this.last_name = partial?.last_name;
-    this.avatar = partial?.avatar;
-  }
 }

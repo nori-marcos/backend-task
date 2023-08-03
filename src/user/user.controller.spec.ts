@@ -2,7 +2,14 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { User } from './entities/user';
-import e from 'express';
+
+const savedUser = {
+  id: '1',
+  email: 'john.doe@mail.com',
+  first_name: 'John',
+  last_name: 'Doe',
+  avatar: 'https://reqres.in/img/faces/1-image.jpg',
+};
 
 describe('UserController', () => {
   let userController: UserController;
@@ -15,7 +22,7 @@ describe('UserController', () => {
         {
           provide: UserService,
           useValue: {
-            saveUser: jest.fn(),
+            saveUser: jest.fn().mockResolvedValue(savedUser),
             getUserById: jest.fn(),
             getUserAvatarByIdAndSave: jest.fn(),
             deleteUserAvatarById: jest.fn(),
@@ -47,16 +54,12 @@ describe('UserController', () => {
       const result = await userController.saveUser(user);
 
       //Assert
-    
-        expect(result.email).toEqual('john.doe@mail.com');
-        expect(result.first_name).toEqual('John');
-        expect(result.last_name).toEqual('Doe');
-        expect(result.avatar).toEqual('https://reqres.in/img/faces/1-image.jpg');
-        expect(result.id).toBeTruthy();
-        // expect(userService.saveUser).toHaveBeenCalledWith(user);
-
-
-
+      expect(result.email).toEqual('john.doe@mail.com');
+      expect(result.first_name).toEqual('John');
+      expect(result.last_name).toEqual('Doe');
+      expect(result.avatar).toEqual('https://reqres.in/img/faces/1-image.jpg');
+      expect(result.id).toBeTruthy();
+      // expect(userService.saveUser).toHaveBeenCalledWith(user);
     });
   });
 });

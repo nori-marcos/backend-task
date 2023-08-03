@@ -29,6 +29,7 @@
     "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.3",
     "axios": "^1.4.0",
+    "mongodb-memory-server": "^8.13.0",
     "mongoose": "^7.4.1",
     "mongoose-unique-validator": "^4.0.0",
     "nestjs-amqp": "^0.2.2",
