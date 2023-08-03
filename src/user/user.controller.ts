@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { User } from './entities/user';
 import { UserService } from './user.service';
+import { ApiCreatedResponse, ApiResponse } from '@nestjs/swagger';
 
 @Controller('api/user')
 export class UserController {
@@ -18,6 +19,10 @@ export class UserController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @HttpCode(HttpStatus.BAD_REQUEST)
+  @ApiCreatedResponse({
+    description: 'The record has been successfully created.',
+    type: User,
+  })
   async saveUser(@Body() user: User): Promise<any> {
     return this._userService.saveUser(user);
   }
@@ -39,10 +44,5 @@ export class UserController {
   @HttpCode(HttpStatus.BAD_REQUEST)
   async deleteUserAvatar(@Param('userId') userId: string): Promise<void> {
     return this._userService.deleteUserAvatar(userId);
-  }
-
-  @Get('/hello')
-  getMessage(): string {
-    return 'getUserAvatar';
   }
 }

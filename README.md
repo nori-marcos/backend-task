@@ -11,4 +11,6 @@ This project was developed using TypeScript , NestJS, MongoDB and RabbitMQ. It i
 1. "npm install" to install all the dependencies
 2. "npm run start:dev" to run the application
 3. MongoDb and Rabbit needs to be running locally in the default ports 27017 and 5672 respectively.
-4. 
+4. Swagger is available for documentation and better understanding: http://localhost:3000/api
+
+
