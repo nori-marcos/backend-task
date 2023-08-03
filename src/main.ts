@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
     .setTitle('User API')
-    .setDescription('User API')
+    .setDescription('It is a REST api to manage users.')
     .setVersion('1.0')
     .addTag('user')
     .build();

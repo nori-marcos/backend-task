@@ -16,16 +16,11 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         name: 'RABBIT_MQ',
         transport: Transport.RMQ,
         options: {
-          urls: ['amqp://localhost'], // Substitua pelo URL do seu servidor RabbitMQ
-          queue: 'queue_name', // Substitua pelo nome da fila que deseja utilizar
+          urls: ['amqp://localhost:5672', 'amqp://localhost:8000'],
+          queue: 'queue_name',
         },
       },
     ]),
-    AmqpModule.forRoot({
-      name: 'rabbitmq',
-      hostname: 'localhost',
-      port: 5672,
-    }),
     MongooseModule.forFeature([
       { name: 'User', schema: UserSchema },
       { name: 'Avatar', schema: AvatarSchema },
